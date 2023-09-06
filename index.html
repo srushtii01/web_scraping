@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Attendance</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>My Attendance</h1>
+        <nav>
+            <ul>
+                <li><a href="https://www.harsheet.co">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>My Attendance Data</h2>
+            <p>
+                Here is a summary of my attendance:
+                <button class="fancy" onclick="fetch_attendance()">
+            Click to get attendance
+          </button>
+            </p>
+
+            <p>
+                Attendance is:
+                <p id="att">Click Button</p>
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Srushti 2023</p>
+    </footer>
+</body>
+<script type="text/javascript">
+    async function fetch_attendance() {
+        var apiUrl = "http://3.111.33.26:5000/";
+        document.getElementById("att").innerHTML = "Loading...";
+        await fetch(apiUrl)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                // Work with JSON data here
+                console.log(data);
+                document.getElementById("att").innerHTML = data["data"];
+            })
+            .catch((err) => {
+                // Do something for an error here
+                console.log("error!");
+            });
+    }
+</script>
+
+</html>
